@@ -10,7 +10,7 @@
 #include <strings.h>
 #include <string.h>
 #include <vector>
-//#include <algorithm>
+#include <algorithm>
 
 using std::cout;
 using std::endl;
@@ -26,6 +26,7 @@ class WordStatic{
 	void write_file();
 	private:
 		string _ss;
+	public:
 		int _num;
 };
 
@@ -34,13 +35,14 @@ vector<WordStatic>::iterator it;
 
 void WordStatic::read_file(){
 	ifstream ifs("The_Holy_Bible.txt");
+//	ifstream ifs("fstream.cpp");
 	if(!ifs.good()){
 		cout<<"ifstream open fail"<<endl;
 		return;
 	}
 
 	string s;
-	char c[4];
+	char c[15];
 
 	while(ifs >> s){
 		bzero(c,sizeof(c));
@@ -61,17 +63,19 @@ void WordStatic::read_file(){
 	}
 }
 
+bool compare(const WordStatic &pst,const WordStatic &pst1 ){
+	//return pst._num > pst1._num;
+	if(pst._num > pst1._num)
+		return true;
+	else 
+		return false;
+}
+
 void WordStatic::write_file(){
-//	int c[10];
-//	string s;
-//	std::sort(vec.begin(),vec.end());
+	std::sort(vec.begin(),vec.end(),compare);
 	for(it=vec.begin(); it != vec.end(); it++){
-//		bzero(c,sizeof(c));
-//		s = static_cast<string>(it->_ss);
-//		strcpy(c,s.c_str());
-//		if(c[0] == 'a' || c[0] == 'A'){
-			cout<<it->_ss<<": "<<it->_num<<endl;
-//		}
+		//	cout<<it->_ss<<": "<<it->_num<<endl;
+			cout<<it->_ss<<": "<<it->_num<<" ";
 	}
 	
 }
